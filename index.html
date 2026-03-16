@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HianStudios | Creación de páginas web</title>
+  <link rel="icon" type="image/png" href="Logo1.png" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #020a24;
+      color: white;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      backdrop-filter: blur(12px);
+      background: rgba(2, 10, 36, 0.78);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .topbar-inner {
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: white;
+      font-weight: 700;
+    }
+
+    .brand img {
+      width: 80px;
+      height: 80px;
+      border-radius: 12px;
+      object-fit: cover;
+      box-shadow: 0 0 18px rgba(59,130,246,0.2);
+    }
+
+    .brand small {
+      display: block;
+      color: #94a3b8;
+      font-weight: 500;
+      font-size: 0.78rem;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      color: #dbe4f0;
+      font-size: 0.96rem;
+      transition: color 0.25s ease;
+    }
+
+    .nav-links a:hover {
+      color: #93c5fd;
+    }
+
+    header {
+      position: relative;
+      padding: 120px 0 90px;
+      text-align: center;
+      background-image: linear-gradient(rgba(2,10,36,0.78), rgba(2,10,36,0.9)), url("fondo.jpg");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      overflow: hidden;
+    }
+
+    header::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(59,130,246,0.22), transparent 24%),
+        radial-gradient(circle at 80% 30%, rgba(168,85,247,0.22), transparent 22%),
+        radial-gradient(circle at 50% 75%, rgba(59,130,246,0.15), transparent 28%);
+      pointer-events: none;
+    }
+
+    header .container {
+      position: relative;
+      z-index: 2;
+      animation: fadeUp 1s ease both;
+    }
+
+    .logo {
+      width: 220px;
+      max-width: 100%;
+      margin-bottom: 25px;
+      border-radius: 18px;
+      box-shadow: 0 0 35px rgba(37, 99, 235, 0.18);
+      transition: transform 0.35s ease, box-shadow 0.35s ease;
+    }
+
+    .logo:hover {
+      transform: translateY(-4px) scale(1.02);
+      box-shadow: 0 0 45px rgba(96, 165, 250, 0.28);
+    }
+
+    h1 {
+      font-size: 3.1rem;
+      line-height: 1.15;
+      max-width: 900px;
+      margin: 0 auto;
+      text-shadow: 0 0 22px rgba(59,130,246,0.12);
+    }
+
+    .subtitle {
+      max-width: 800px;
+      margin: 22px auto 0;
+      color: #dbe4f0;
+      font-size: 1.08rem;
+    }
+
+    .buttons {
+      margin-top: 35px;
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 14px 26px;
+      border-radius: 12px;
+      font-weight: bold;
+      display: inline-block;
+      transition: 0.25s ease;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #2563eb, #3b82f6);
+      color: white;
+      box-shadow: 0 0 22px rgba(59,130,246,0.28);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 28px rgba(96,165,250,0.38);
+    }
+
+    .btn-secondary {
+      border: 1px solid rgba(255,255,255,0.22);
+      color: white;
+      background: rgba(255,255,255,0.03);
+      backdrop-filter: blur(8px);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255,255,255,0.08);
+      transform: translateY(-2px);
+    }
+
+    section {
+      padding: 80px 0;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 2.35rem;
+      margin-bottom: 12px;
+    }
+
+    .section-subtitle {
+      text-align: center;
+      color: #cbd5e1;
+      margin-bottom: 42px;
+    }
+
+    .grid {
+      display: grid;
+      gap: 22px;
+    }
+
+    .services-grid {
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    }
+
+    .benefits-grid,
+    .portfolio-grid,
+    .faq-grid,
+    .why-grid {
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    }
+
+    .card {
+      background: linear-gradient(180deg, rgba(7,19,59,0.95), rgba(7,19,59,0.8));
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 28px;
+      padding: 24px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.18);
+      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(96,165,250,0.38);
+      box-shadow: 0 16px 35px rgba(15, 23, 42, 0.42), 0 0 26px rgba(59,130,246,0.13);
+      background: linear-gradient(180deg, rgba(10,26,76,0.98), rgba(7,19,59,0.9));
+    }
+
+    .card-icon {
+      font-size: 2rem;
+      margin-bottom: 12px;
+    }
+
+    .card h3 {
+      margin-bottom: 10px;
+      font-size: 1.2rem;
+    }
+
+    .card p {
+      color: #cbd5e1;
+    }
+
+    .alt-section {
+      background: linear-gradient(180deg, #040f2e 0%, #06163f 100%);
+    }
+
+    .service-list {
+      max-width: 760px;
+      margin: auto;
+      display: grid;
+      gap: 14px;
+    }
+
+    .service-item {
+      background: #07133b;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 18px;
+      padding: 16px 18px;
+      color: #e2e8f0;
+      transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+    }
+
+    .service-item:hover {
+      transform: translateX(4px);
+      border-color: rgba(96,165,250,0.32);
+      background: linear-gradient(180deg, rgba(10,26,76,0.98), rgba(7,19,59,0.9));
+    }
+
+    .price-box {
+      text-align: center;
+    }
+
+    .price {
+      font-size: 3.3rem;
+      font-weight: 900;
+      color: #60a5fa;
+      margin-top: 18px;
+      text-shadow: 0 0 24px rgba(59,130,246,0.18);
+    }
+
+    .contact-box {
+      max-width: 760px;
+      margin: auto;
+      text-align: center;
+      background: linear-gradient(180deg, rgba(7,19,59,0.98), rgba(7,19,59,0.88));
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 28px;
+      padding: 38px 25px;
+      box-shadow: 0 12px 35px rgba(0,0,0,0.2);
+    }
+
+    .contact-info {
+      margin-top: 22px;
+      color: #cbd5e1;
+    }
+
+    .contact-info p {
+      margin: 8px 0;
+    }
+
+    .faq-item {
+      background: linear-gradient(180deg, rgba(7,19,59,0.95), rgba(7,19,59,0.82));
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 28px;
+      padding: 22px;
+      transition: border-color 0.25s ease, transform 0.25s ease, background 0.25s ease;
+    }
+
+    .faq-item:hover {
+      transform: translateY(-4px);
+      border-color: rgba(96,165,250,0.28);
+      background: linear-gradient(180deg, rgba(10,26,76,0.98), rgba(7,19,59,0.9));
+    }
+
+    .faq-item h3 {
+      margin-bottom: 10px;
+      font-size: 1.08rem;
+    }
+
+    .faq-item p {
+      color: #cbd5e1;
+    }
+
+    .portfolio-card {
+      overflow: hidden;
+      padding: 0;
+      border-radius: 28px;
+    }
+
+    .portfolio-video {
+      width: 100%;
+      display: block;
+      background: #020617;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .portfolio-content {
+      padding: 22px;
+    }
+
+    .portfolio-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 16px;
+    }
+
+    .mini-btn {
+      padding: 11px 15px;
+      border-radius: 10px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      display: inline-block;
+      transition: 0.25s ease;
+    }
+
+    .mini-btn-primary {
+      background: linear-gradient(135deg, #2563eb, #3b82f6);
+      color: white;
+      box-shadow: 0 0 16px rgba(59,130,246,0.25);
+    }
+
+    .mini-btn-primary:hover {
+      transform: translateY(-2px);
+    }
+
+    .mini-btn-secondary {
+      border: 1px solid rgba(255,255,255,0.12);
+      color: #dbe4f0;
+      background: rgba(255,255,255,0.03);
+    }
+
+    .mini-btn-secondary:hover {
+      background: rgba(255,255,255,0.08);
+    }
+
+    .whatsapp-float {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      z-index: 999;
+      background: linear-gradient(135deg, #2563eb, #3b82f6);
+      color: #fff;
+      padding: 14px 18px;
+      border-radius: 999px;
+      font-weight: bold;
+      box-shadow: 0 0 28px rgba(59,130,246,0.35);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .whatsapp-float:hover {
+      transform: translateY(-3px) scale(1.03);
+      box-shadow: 0 0 34px rgba(96,165,250,0.45);
+    }
+
+    footer {
+      padding: 28px 0 40px;
+      text-align: center;
+      color: #94a3b8;
+      font-size: 0.95rem;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(26px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(24px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 860px) {
+      .topbar-inner {
+        padding: 12px 0;
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .nav-links {
+        gap: 12px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2.15rem;
+      }
+
+      .section-title {
+        font-size: 1.9rem;
+      }
+
+      .price {
+        font-size: 2.7rem;
+      }
+
+      .whatsapp-float {
+        right: 14px;
+        bottom: 14px;
+        padding: 12px 16px;
+        font-size: 0.95rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="topbar">
+    <div class="container topbar-inner">
+      <a href="#inicio" class="brand">
+        <img src="Logo.png" alt="Logo HianStudios" />
+        <span>
+          HianStudios
+          <small>A project by Hians Entertainment</small>
+        </span>
+      </a>
+
+      <nav class="nav-links">
+        <a href="#servicios">Servicios</a>
+        <a href="#muestras">Muestras</a>
+        <a href="#porque">Por qué elegirme</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+    </div>
+  </div>
+
+  <header id="inicio">
+    <div class="container">
+      <img src="Horizontal.png" alt="Logo HianStudios" class="logo">
+      <h1>Creamos páginas web profesionales para que tu negocio destaque en internet</h1>
+      <p class="subtitle">
+        Hoy en día muchas personas buscan negocios directamente en Google o desde su teléfono.
+        Tener una página web profesional permite que más clientes encuentren tu negocio, vean tus productos y puedan contactarte fácilmente.
+      </p>
+
+      <div class="buttons">
+        <a class="btn btn-primary" href="https://wa.me/593964037281" target="_blank">Solicitar mi página web</a>
+        <a class="btn btn-secondary" href="#servicios">Ver servicios</a>
+      </div>
+    </div>
+  </header>
+
+  <section id="servicios" class="reveal">
+    <div class="container">
+      <h2 class="section-title">Nuestro servicio incluye</h2>
+      <p class="section-subtitle">Todo lo necesario para que tu negocio tenga presencia profesional en internet</p>
+
+      <div class="grid services-grid">
+        <div class="card">
+          <div class="card-icon">🌐</div>
+          <h3>Diseño de página web</h3>
+          <p>Página principal del negocio, información clara, diseño moderno y presentación profesional.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">📦</div>
+          <h3>Productos o menú</h3>
+          <p>Sección para mostrar tus productos, servicios o menú de forma ordenada y atractiva.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">💬</div>
+          <h3>Botón de WhatsApp</h3>
+          <p>Tus clientes podrán escribirte directamente para hacer pedidos o consultas.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">🔎</div>
+          <h3>Configuración para Google</h3>
+          <p>Preparamos tu página para que pueda aparecer cuando las personas busquen tu negocio o servicios.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="alt-section reveal">
+    <div class="container">
+      <h2 class="section-title">Beneficios para tu negocio</h2>
+      <p class="section-subtitle">Una página web mejora la imagen y el alcance de tu negocio</p>
+
+      <div class="grid benefits-grid">
+        <div class="card"><p>Más visibilidad en internet</p></div>
+        <div class="card"><p>Clientes que pueden encontrarte fácilmente</p></div>
+        <div class="card"><p>Imagen más profesional</p></div>
+        <div class="card"><p>Canal directo de contacto con tus clientes</p></div>
+        <div class="card"><p>Funciona bien en celular y computadora</p></div>
+        <div class="card"><p>Ideal para negocios locales y emprendimientos</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="muestras" class="alt-section reveal">
+    <div class="container">
+      <h2 class="section-title">Muestras de páginas realizadas</h2>
+      <p class="section-subtitle">Estas son demos reales para que tus clientes vean el nivel visual que puedes ofrecer</p>
+
+      <div class="grid portfolio-grid">
+        <div class="card portfolio-card">
+          <video class="portfolio-video" controls muted playsinline preload="metadata" poster="Horizontal.png">
+            <source src="muestra1.mp4" type="video/mp4">
+            Tu navegador no soporta video.
+          </video>
+          <div class="portfolio-content">
+            <h3>KovBold</h3>
+            <p>Página promocional con presencia moderna, enfoque visual fuerte y estructura tipo marca digital.</p>
+            <div class="portfolio-actions">
+              <a class="mini-btn mini-btn-primary" href="https://kovbold.vercel.app/" target="_blank">Ver sitio</a>
+              <a class="mini-btn mini-btn-secondary" href="https://kovbold.vercel.app/" target="_blank">Abrir demo</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="card portfolio-card">
+          <video class="portfolio-video" controls muted playsinline preload="metadata" poster="Horizontal.png">
+            <source src="muestra2.mp4" type="video/mp4">
+            Tu navegador no soporta video.
+          </video>
+          <div class="portfolio-content">
+            <h3>Campo Dorado</h3>
+            <p>Diseño enfocado en negocio, identidad clara, presentación profesional y experiencia limpia para el usuario.</p>
+            <div class="portfolio-actions">
+              <a class="mini-btn mini-btn-primary" href="https://campo-dorado-web.lovable.app/" target="_blank">Ver sitio</a>
+              <a class="mini-btn mini-btn-secondary" href="https://campo-dorado-web.lovable.app/" target="_blank">Abrir demo</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="porque" class="reveal">
+    <div class="container">
+      <h2 class="section-title">Por qué elegir HianStudios</h2>
+      <p class="section-subtitle">No solo es una página bonita. Es una presentación profesional pensada para vender mejor.</p>
+
+      <div class="grid why-grid">
+        <div class="card">
+          <div class="card-icon">🎯</div>
+          <h3>Enfoque en negocio</h3>
+          <p>La página se diseña para mostrar tu negocio, aclarar lo que ofreces y facilitar que el cliente te contacte.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">⚡</div>
+          <h3>Entrega rápida</h3>
+          <p>El servicio está pensado para entregar en pocos días y poner tu negocio online lo antes posible.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">📱</div>
+          <h3>Diseño adaptable</h3>
+          <p>Se ve bien en celular, tablet y computadora para que no pierdas clientes por mala presentación.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">🤝</div>
+          <h3>Trato personalizado</h3>
+          <p>Cada proyecto se ajusta al estilo, productos, servicios y forma de vender de cada negocio.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="reveal">
+    <div class="container">
+      <h2 class="section-title">Qué incluye tu página web</h2>
+      <p class="section-subtitle">Servicio completo para presencia digital profesional</p>
+
+      <div class="service-list">
+        <div class="service-item">Página principal del negocio</div>
+        <div class="service-item">Sección de productos o menú</div>
+        <div class="service-item">Información del negocio</div>
+        <div class="service-item">Ubicación y contacto</div>
+        <div class="service-item">Botón de pedidos por WhatsApp</div>
+        <div class="service-item">Conexión de dominio, por ejemplo: www.tunegocio.com</div>
+        <div class="service-item">Configuración básica para aparecer en Google</div>
+        <div class="service-item">Correo profesional del negocio, por ejemplo: contacto@tunegocio.com</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="alt-section reveal">
+    <div class="container price-box">
+      <h2 class="section-title">Precio del servicio</h2>
+      <div class="price">Desde $120</div>
+      <p class="section-subtitle" style="margin-top: 12px; margin-bottom: 0;">Tiempo de entrega aproximado: 2 a 4 días</p>
+    </div>
+  </section>
+
+  <section id="contacto" class="reveal">
+    <div class="container">
+      <div class="contact-box">
+        <h2 class="section-title" style="margin-bottom: 10px;">Solicita tu página web</h2>
+        <p class="section-subtitle" style="margin-bottom: 25px;">
+          Si deseas más información o una demostración del sitio web, puedes escribirnos directamente.
+        </p>
+
+        <a class="btn btn-primary" href="https://wa.me/593964037281" target="_blank">Escribirme por WhatsApp</a>
+
+        <div class="contact-info">
+          <p><strong>WhatsApp:</strong> +593 96 403 7281</p>
+          <p><strong>Correo:</strong> hianstudioshs@gmail.com</p>
+          <p><strong>Marca:</strong> HianStudios</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq" class="alt-section reveal">
+    <div class="container">
+      <h2 class="section-title">Preguntas frecuentes</h2>
+      <p class="section-subtitle">Respuestas rápidas para tus futuros clientes</p>
+
+      <div class="grid faq-grid">
+        <div class="faq-item">
+          <h3>¿Necesito tener dominio para empezar?</h3>
+          <p>No obligatoriamente. Se puede iniciar el proyecto y luego conectar tu dominio cuando lo tengas listo.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3>¿La página funcionará en celular?</h3>
+          <p>Sí. La página está pensada para verse correctamente en teléfonos, tablets y computadoras.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3>¿Puedo pedir cambios después?</h3>
+          <p>Sí. Se pueden realizar ajustes en textos, imágenes, productos, promociones o información del negocio.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3>¿En cuánto tiempo se entrega?</h3>
+          <p>Normalmente entre 2 y 4 días, dependiendo del contenido y de qué tan rápido se entregue la información.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      HianStudios — A project by Hians Entertainment
+    </div>
+  </footer>
+
+  <a class="whatsapp-float" href="https://wa.me/593964037281" target="_blank">WhatsApp</a>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+  </script>
+</body>
+</html>
